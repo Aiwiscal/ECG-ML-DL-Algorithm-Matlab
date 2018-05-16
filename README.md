@@ -1,2 +1,2 @@
-# ECG-ML-DL-Algorithm-Matlab-versionversion
+# ECG-ML-DL-Algorithm-Matlab-version
 Basic Algorithm For Beginners
