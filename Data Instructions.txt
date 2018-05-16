@@ -1,0 +1,52 @@
+每一个mat的数据导入后workspace有三个：
+M为两个导联的心电数据（360hz，单位mv），
+ATRTIMED为标注的时间（单位s），
+ANNOTD为ATRTIMED处的标记。
+
+
+		
+% 注释代码		说明
+
+
+% 0		No TQRS
+% 1     N	Normal beat                                   正常搏动   
+% 2     L	Left bundle branch block beat                 左束支传导阻滞
+% 3     R	Right bundle branch block beat                右束支传导阻滞
+% 4     a	Aberrated atrial premature beat               异常房性早搏
+% 5     V	Premature ventricular contraction             室性早搏
+% 6     F	Fusuion of ventricular and normal beat        心室融合心跳
+% 7     J	Nodal (junctional) premature beat             交界性早搏 
+% 8     A	Atrial premature beat                         房性早搏
+% 9     S	Premature or ectopic supraventricular beat    室上性早搏或者异位心搏 
+% 10	E	Ventricular escape beat                       室性逸搏 
+% 11	j	Nodal (junctional) escape beat                交界性逸搏
+% 12	/	Paced beat                                    起搏心跳
+% 13	Q	Unclassifiable beat                           未分类心跳 
+% 14	~	Signal quality change
+% 15		Not specified
+% 16	|	Isolated QRS-like artifact
+% 17		Not specified
+% 18	s	ST change
+% 19	T	T-wave change
+% 20	*	Systole
+% 21	D	Diastole
+% 22	"	Comment annotation
+% 23	=	Measurement annotation
+% 24	p	P-wave peak
+% 25	B	Left or right bundle branch block
+% 26	^	Non-conducted pacer spike
+% 27	t	T-wave peak
+% 28	+	Rythm change
+% 29	u	U-wave peak
+% 30	?	Learning
+% 31	!	Ventricular flutter wave                                室扑
+% 32	[	Start of ventricular flutter/fibrillation
+% 33	]	End of ventricular flutter/fibrillation
+% 34	e	Atrial escape beat                           房性逸搏
+% 35	n	Supraventricular espace beat                 室上性逸搏
+% 36		Not specified
+% 37	x	Non-conducted P-wave (blocked APB)
+% 38	f	Fusion of paced and normal beat              起搏心跳和正常心跳的融合
+% 39	(	Waveform onset, PQ junction(begin of QRS)
+% 40	)	Waveform end, JPT(J point, end of QRS)
+% 41	r	R-on-T premature ventricular contraction     R-on-T性室性早搏
