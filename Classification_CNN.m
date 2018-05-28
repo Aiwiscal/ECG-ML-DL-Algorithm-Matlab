@@ -1,5 +1,5 @@
 clear;clc;
-%% ÔØÈëÊı¾İ£»
+%% è½½å…¥æ•°æ®ï¼›
 fprintf('Loading data...\n');
 tic;
 load('N_dat.mat');
@@ -9,7 +9,7 @@ load('V_dat.mat');
 fprintf('Finished!\n');
 toc;
 fprintf('=============================================================\n');
-%% ¿ØÖÆÊ¹ÓÃÊı¾İÁ¿£¬Ã¿Ò»Àà5000£¬²¢Éú³É±êÇ©,one-hot±àÂë£»
+%% æ§åˆ¶ä½¿ç”¨æ•°æ®é‡ï¼Œæ¯ä¸€ç±»5000ï¼Œå¹¶ç”Ÿæˆæ ‡ç­¾,one-hotç¼–ç ï¼›
 fprintf('Data preprocessing...\n');
 tic;
 Nb=Nb(1:5000,:);Label1=repmat([1;0;0;0],1,5000);
@@ -24,14 +24,14 @@ clear Nb;clear Label1;
 clear Rb;clear Label2;
 clear Lb;clear Label3;
 clear Vb;clear Label4;
-Data=Data-repmat(mean(Data,2),1,250); %Ê¹ĞÅºÅµÄ¾ùÖµÎª0£¬È¥µô»ùÏßµÄÓ°Ïì£»
+Data=Data-repmat(mean(Data,2),1,250); %ä½¿ä¿¡å·çš„å‡å€¼ä¸º0ï¼Œå»æ‰åŸºçº¿çš„å½±å“ï¼›
 fprintf('Finished!\n');
 toc;
 fprintf('=============================================================\n');
 
-%% Êı¾İ»®·ÖÓëÄ£ĞÍÑµÁ·²âÊÔ£»
+%% æ•°æ®åˆ’åˆ†ä¸æ¨¡å‹è®­ç»ƒæµ‹è¯•ï¼›
 fprintf('Model training and testing...\n');
-Nums=randperm(20000);      %Ëæ»ú´òÂÒÑù±¾Ë³Ğò£¬´ïµ½Ëæ»úÑ¡ÔñÑµÁ·²âÊÔÑù±¾µÄÄ¿µÄ£»
+Nums=randperm(20000);      %éšæœºæ‰“ä¹±æ ·æœ¬é¡ºåºï¼Œè¾¾åˆ°éšæœºé€‰æ‹©è®­ç»ƒæµ‹è¯•æ ·æœ¬çš„ç›®çš„ï¼›
 train_x=Data(Nums(1:10000),:);
 test_x=Data(Nums(10001:end),:);
 train_y=Label(:,Nums(1:10000));
@@ -46,21 +46,21 @@ cnn.layers = {
     struct('type', 'c', 'outputmaps', 8, 'kernelsize', 6,'actv','relu') %convolution layer
     struct('type', 's', 'scale', 3,'pool','mean') %subsampling layer
 };
-cnn.output = 'softmax';  %È·¶¨cnn½á¹¹£»
-                         %È·¶¨³¬²ÎÊı£»
-opts.alpha = 0.01;       %Ñ§Ï°ÂÊ£»
-opts.batchsize = 16;     %batch¿é´óĞ¡£»
-opts.numepochs = 30;     %µü´úepoch£»
+cnn.output = 'softmax';  %ç¡®å®šcnnç»“æ„ï¼›
+                         %ç¡®å®šè¶…å‚æ•°ï¼›
+opts.alpha = 0.01;       %å­¦ä¹ ç‡ï¼›
+opts.batchsize = 16;     %batchå—å¤§å°ï¼›
+opts.numepochs = 30;     %è¿­ä»£epochï¼›
 
-cnn = cnnsetup1d(cnn, train_x, train_y);      %½¨Á¢1D CNN;
-cnn = cnntrain1d(cnn, train_x, train_y,opts); %ÑµÁ·1D CNN;
-[er,bad,out] = cnntest1d(cnn, test_x, test_y);%²âÊÔ1D CNN;
+cnn = cnnsetup1d(cnn, train_x, train_y);      %å»ºç«‹1D CNN;
+cnn = cnntrain1d(cnn, train_x, train_y,opts); %è®­ç»ƒ1D CNN;
+[er,bad,out] = cnntest1d(cnn, test_x, test_y);%æµ‹è¯•1D CNN;
 
 [~,ptest]=max(out,[],1);
 [~,test_yt]=max(test_y,[],1);
 
-Correct_Predict=zeros(1,4);                     %Í³¼Æ¸÷Àà×¼È·ÂÊ£»
-Class_Num=zeros(1,4);                           %²¢µÃµ½»ìÏı¾ØÕó£»
+Correct_Predict=zeros(1,4);                     %ç»Ÿè®¡å„ç±»å‡†ç¡®ç‡ï¼›
+Class_Num=zeros(1,4);                           %å¹¶å¾—åˆ°æ··æ·†çŸ©é˜µï¼›
 Conf_Mat=zeros(4);
 for i=1:10000
     Class_Num(test_yt(i))=Class_Num(test_yt(i))+1;
