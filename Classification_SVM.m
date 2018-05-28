@@ -1,5 +1,5 @@
 clear;clc;
-%% ÔØÈëÊı¾İ£»
+%% è½½å…¥æ•°æ®ï¼›
 fprintf('Loading data...\n');
 tic;
 load('N_dat.mat');
@@ -9,7 +9,7 @@ load('V_dat.mat');
 fprintf('Finished!\n');
 toc;
 fprintf('=============================================================\n');
-%% ¿ØÖÆÊ¹ÓÃÊı¾İÁ¿£¬Ã¿Ò»Àà5000£¬²¢Éú³É±êÇ©£»
+%% æ§åˆ¶ä½¿ç”¨æ•°æ®é‡ï¼Œæ¯ä¸€ç±»5000ï¼Œå¹¶ç”Ÿæˆæ ‡ç­¾ï¼›
 fprintf('Data preprocessing...\n');
 tic;
 Nb=Nb(1:5000,:);Label1=ones(1,5000);%Label1=repmat([1;0;0;0],1,5000);
@@ -25,38 +25,38 @@ clear Nb;clear Label1;
 clear Rb;clear Label2;
 clear Lb;clear Label3;
 clear Vb;clear Label4;
-Data=Data-repmat(mean(Data,2),1,250); %Ê¹ĞÅºÅµÄ¾ùÖµÎª0£¬È¥µô»ùÏßµÄÓ°Ïì£»
+Data=Data-repmat(mean(Data,2),1,250); %ä½¿ä¿¡å·çš„å‡å€¼ä¸º0ï¼Œå»æ‰åŸºçº¿çš„å½±å“ï¼›
 fprintf('Finished!\n');
 toc;
 fprintf('=============================================================\n');
-%% ÀûÓÃĞ¡²¨±ä»»ÌáÈ¡ÏµÊıÌØÕ÷£¬²¢ÇĞ·ÖÑµÁ·ºÍ²âÊÔ¼¯£»
+%% åˆ©ç”¨å°æ³¢å˜æ¢æå–ç³»æ•°ç‰¹å¾ï¼Œå¹¶åˆ‡åˆ†è®­ç»ƒå’Œæµ‹è¯•é›†ï¼›
 fprintf('Feature extracting and normalizing...\n');
 tic;
 Feature=[];
 for i=1:size(Data,1)
-    [C,L]=wavedec(Data(i,:),5,'db6');  %% db6Ğ¡²¨5¼¶·Ö½â£»
+    [C,L]=wavedec(Data(i,:),5,'db6');  %% db6å°æ³¢5çº§åˆ†è§£ï¼›
     Feature=[Feature;C(1:25)];
 end
 
-Nums=randperm(20000);      %Ëæ»ú´òÂÒÑù±¾Ë³Ğò£¬´ïµ½Ëæ»úÑ¡ÔñÑµÁ·²âÊÔÑù±¾µÄÄ¿µÄ£»
+Nums=randperm(20000);      %éšæœºæ‰“ä¹±æ ·æœ¬é¡ºåºï¼Œè¾¾åˆ°éšæœºé€‰æ‹©è®­ç»ƒæµ‹è¯•æ ·æœ¬çš„ç›®çš„ï¼›
 train_x=Feature(Nums(1:10000),:);
 test_x=Feature(Nums(10001:end),:);
 train_y=Label(Nums(1:10000));
 test_y=Label(Nums(10001:end));
 
-[train_x,ps]=mapminmax(train_x',0,1); %ÀûÓÃmapminmaxÄÚ½¨º¯ÊıÌØÕ÷¹éÒ»»¯µ½0£¬1Ö®¼ä£»
+[train_x,ps]=mapminmax(train_x',0,1); %åˆ©ç”¨mapminmaxå†…å»ºå‡½æ•°ç‰¹å¾å½’ä¸€åŒ–åˆ°0ï¼Œ1ä¹‹é—´ï¼›
 test_x=mapminmax('apply',test_x',ps);
 train_x=train_x';test_x=test_x';
 fprintf('Finished!\n');
 toc;
 fprintf('=============================================================\n');
-%% ÑµÁ·SVM£¬²¢²âÊÔĞ§¹û£»
+%% è®­ç»ƒSVMï¼Œå¹¶æµ‹è¯•æ•ˆæœï¼›
 fprintf('SVM training and testing...\n');
 tic;
-model=libsvmtrain(train_y,train_x,'-c 2 -g 1'); %Ä£ĞÍÑµÁ·£»
-[ptest,~,~]=libsvmpredict(test_y,test_x,model); %Ä£ĞÍÔ¤²â£»
+model=libsvmtrain(train_y,train_x,'-c 2 -g 1'); %æ¨¡å‹è®­ç»ƒï¼›
+[ptest,~,~]=libsvmpredict(test_y,test_x,model); %æ¨¡å‹é¢„æµ‹ï¼›
 
-Correct_Predict=zeros(1,4);                     %Í³¼Æ¸÷Àà×¼È·ÂÊ£»
+Correct_Predict=zeros(1,4);                     %ç»Ÿè®¡å„ç±»å‡†ç¡®ç‡ï¼›
 Class_Num=zeros(1,4);
 Conf_Mat=zeros(4);
 for i=1:10000
